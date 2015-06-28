@@ -21,7 +21,7 @@ except ImportError:
 from django.http import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import loader, Context
-import simplejson
+import json
 from django.views.decorators.csrf import csrf_exempt
 
 try:
@@ -120,7 +120,7 @@ class API:
 
 
     def api_public_list_queues(self):
-        return api_return(STATUS_OK, simplejson.dumps([{"id": "%s" % q.id, "title": "%s" % q.title} for q in Queue.objects.all()]), json=True)
+        return api_return(STATUS_OK, json.dumps([{"id": "%s" % q.id, "title": "%s" % q.title} for q in Queue.objects.all()]), json=True)
 
 
     def api_public_find_user(self):
