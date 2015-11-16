@@ -83,7 +83,7 @@ def process_email(quiet=False):
 
 def process_queue(q, quiet=False):
     if not quiet:
-        print "Processing: %s" % q
+        print("Processing: %s" % q)
 
     if q.socks_proxy_type and q.socks_proxy_host and q.socks_proxy_port:
         try:
@@ -290,7 +290,7 @@ def ticket_from_message(message, queue, quiet):
     f.save()
 
     if not quiet:
-        print (" [%s-%s] %s" % (t.queue.slug, t.id, t.title,)).encode('ascii', 'replace')
+        print((" [%s-%s] %s" % (t.queue.slug, t.id, t.title,)).encode('ascii', 'replace'))
 
     for file in files:
         if file['content']:
@@ -305,7 +305,7 @@ def ticket_from_message(message, queue, quiet):
             a.file.save(filename, ContentFile(file['content']), save=False)
             a.save()
             if not quiet:
-                print "    - %s" % filename
+                print("    - %s" % filename)
 
 
     context = safe_template_context(t)
