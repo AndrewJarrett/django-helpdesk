@@ -8,7 +8,8 @@ scripts/escalate_tickets.py - Easy way to escalate tickets based on their age,
                               designed to be run from Cron or similar.
 """
 
-from datetime import timedelta, date
+from datetime import timedelta, date, datetime
+import pytz
 import getopt
 from optparse import make_option
 import sys
@@ -82,7 +83,9 @@ def escalate_tickets(queues, verbose):
             workdate = workdate + timedelta(days=1)
 
 
-        req_last_escl_date = date.today() - timedelta(days=days)
+        dt = datetime.now() - timedelta(days=days)
+        req_last_escl_date = datetime(dt.year, dt.month, dt.day)
+        req_last_escl_date = req_last_escl_date.replace(tzinfo=pytz.UTC)
 
         if verbose:
             print("Processing: %s" % q)
